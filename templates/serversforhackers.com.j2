@@ -1,0 +1,57 @@
+#server {
+#    listen 80 default_server;
+#    server_name *.serversforhackers.com;
+#    return 301 https://serversforhackers.com$request_uri;
+#}
+
+server {
+    listen 80 default_server;
+    listen 443 default_server;
+
+    root /var/www/serversforhackers.com/public;
+    index index.html index.htm index.php;
+
+    access_log /var/log/nginx/serversforhackers.com.log;
+    error_log  /var/log/nginx/serversforhackers.com-error.log error;
+
+    server_name www.serversforhackers.com serversforhackers.com;
+
+    charset utf-8;
+
+    include h5bp/basic.conf;
+
+    #ssl on;
+    #ssl_certificate           /etc/ssl/sfh/sfh.crt;
+    #ssl_certificate_key       /etc/ssl/sfh/sfh.key;
+    #include h5bp/directive-only/ssl.conf;
+
+    location /book {
+        return 301 http://book.serversforhackers.com;
+    }
+
+    location / {
+        try_files $uri $uri/ /index.php$is_args$args;
+    }
+
+    location = /favicon.ico { log_not_found off; access_log off; }
+    location = /robots.txt  { log_not_found off; access_log off; }
+
+    location ~ \.php$ {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+
+        fastcgi_pass unix:/var/run/php5-fpm.sock;
+        fastcgi_index index.php;
+
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO       $fastcgi_path_info;
+        fastcgi_param ENV production;
+    }
+
+    #location /status {
+    #    status;
+    #    status_format json;
+    #    allow 127.0.0.1;
+    #    deny all;
+    #}
+}
