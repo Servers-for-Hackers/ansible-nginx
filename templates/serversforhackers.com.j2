@@ -20,10 +20,10 @@ server {
 
     include h5bp/basic.conf;
 
-    #ssl on;
-    #ssl_certificate           /etc/ssl/sfh/sfh.crt;
-    #ssl_certificate_key       /etc/ssl/sfh/sfh.key;
-    #include h5bp/directive-only/ssl.conf;
+    ssl on;
+    ssl_certificate           /etc/ssl/sfh/sfh.crt;
+    ssl_certificate_key       /etc/ssl/sfh/sfh.key;
+    include h5bp/directive-only/ssl.conf;
 
     location /book {
         return 301 http://book.serversforhackers.com;
