@@ -1,12 +1,12 @@
-#server {
-#    listen 80 default_server;
-#    server_name *.serversforhackers.com;
-#    return 301 https://serversforhackers.com$request_uri;
-#}
+server {
+    # Enforce the use of HTTPS
+    listen 80 default_server;
+    server_name *.serversforhackers.com;
+    return 301 https://serversforhackers.com$request_uri;
+}
 
 server {
-    listen 80 default_server;
-    listen 443 default_server;
+    listen 443 default_server ssl;
 
     root /var/www/serversforhackers.com/public;
     index index.html index.htm index.php;
@@ -20,7 +20,6 @@ server {
 
     include h5bp/basic.conf;
 
-    ssl on;
     ssl_certificate           /etc/ssl/sfh/sfh.crt;
     ssl_certificate_key       /etc/ssl/sfh/sfh.key;
     include h5bp/directive-only/ssl.conf;
@@ -48,10 +47,20 @@ server {
         fastcgi_param ENV production;
     }
 
+    # Nginx status
+    # Nginx Plus only
     #location /status {
     #    status;
     #    status_format json;
     #    allow 127.0.0.1;
     #    deny all;
     #}
+
+    location ~ ^/(fpmstatus|fpmping)$ {
+        access_log off;
+        allow 127.0.0.1;
+        deny all;
+        include fastcgi_params;
+        fastcgi_pass unix:/var/run/php5-fpm.sock;
+    }
 }
