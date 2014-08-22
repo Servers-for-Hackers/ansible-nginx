@@ -1,31 +1,31 @@
 server {
     # Enforce the use of HTTPS
     listen 80 default_server;
-    server_name *.serversforhackers.com;
-    return 301 https://serversforhackers.com$request_uri;
+    server_name *.{{ domain }};
+    return 301 https://{{ domain }}$request_uri;
 }
 
 server {
     listen 443 default_server ssl;
 
-    root /var/www/serversforhackers.com/public;
+    root /var/www/{{ domain }}/public;
     index index.html index.htm index.php;
 
-    access_log /var/log/nginx/serversforhackers.com.log;
-    error_log  /var/log/nginx/serversforhackers.com-error.log error;
+    access_log /var/log/nginx/{{ domain }}.log;
+    error_log  /var/log/nginx/{{ domain }}-error.log error;
 
-    server_name www.serversforhackers.com serversforhackers.com;
+    server_name {{ domain }};
 
     charset utf-8;
 
     include h5bp/basic.conf;
 
-    ssl_certificate           /etc/ssl/sfh/sfh.crt;
-    ssl_certificate_key       /etc/ssl/sfh/sfh.key;
+    ssl_certificate           {{ ssl_crt }};
+    ssl_certificate_key       {{ ssl_key }};
     include h5bp/directive-only/ssl.conf;
 
     location /book {
-        return 301 http://book.serversforhackers.com;
+        return 301 http://book.{{ domain }};
     }
 
     location / {
