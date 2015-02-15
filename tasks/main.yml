@@ -39,3 +39,20 @@
   file: dest=/var/www/{{ domain }} mode=775 state=directory owner=www-data group=www-data recurse=yes
   notify:
     - Reload Nginx
+
+- name: Enable SFH Forums Config
+  when: sfhconfig|success
+  file: src=/etc/nginx/sites-available/{{ forums_domain }}.conf dest=/etc/nginx/sites-enabled/{{ forums_domain }}.conf state=link
+
+
+- name: Create Forums Web root
+  when: nginxinstalled|success
+  file: dest=/var/www/{{ forums_domain }}/public mode=775 state=directory owner=www-data group=www-data
+  notify:
+    - Reload Nginx
+
+- name: Web Root Permissions
+  when: nginxinstalled|success
+  file: dest=/var/www/{{ forums_domain }} mode=775 state=directory owner=www-data group=www-data recurse=yes
+  notify:
+    - Reload Nginx

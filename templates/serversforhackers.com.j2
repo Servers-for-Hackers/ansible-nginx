@@ -59,24 +59,25 @@ server {
     }
 
     location / {
-        try_files $uri $uri/ =404;
+        try_files $uri $uri/ /index.php$is_args$args;
     }
 
 
     location = /favicon.ico { log_not_found off; access_log off; }
     location = /robots.txt  { log_not_found off; access_log off; }
 
-    #location ~ \.php$ {
-    #    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+    location ~ ^/index\.php(/|$) {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
 
-    #    fastcgi_pass unix:/var/run/php5-fpm.sock;
-    #    fastcgi_index index.php;
+        fastcgi_pass unix:/var/run/php5-fpm.sock;
+        fastcgi_index index.php;
 
-    #    include fastcgi.conf;
-    #    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    #    fastcgi_param PATH_INFO       $fastcgi_path_info;
-    #    fastcgi_param ENV {{ environment }};
-    #}
+        include fastcgi.conf;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO       $fastcgi_path_info;
+        fastcgi_param ENV {{ environment }};
+        internal;
+    }
 
     # Nginx status
     # Nginx Plus only
@@ -87,11 +88,11 @@ server {
     #    deny all;
     #}
 
-    #location ~ ^/(fpmstatus|fpmping)$ {
-    #    access_log off;
-    #    allow 127.0.0.1;
-    #    deny all;
-    #    include fastcgi.conf;
-    #    fastcgi_pass unix:/var/run/php5-fpm.sock;
-    #}
+    location ~ ^/(fpmstatus|fpmping)$ {
+        access_log off;
+        allow 127.0.0.1;
+        deny all;
+        include fastcgi.conf;
+        fastcgi_pass unix:/var/run/php5-fpm.sock;
+    }
 }

@@ -20,8 +20,8 @@ server {
 
     include h5bp/basic.conf;
 
-    ssl_certificate           {{ ssl_crt }};
-    ssl_certificate_key       {{ ssl_key }};
+    ssl_certificate           {{ ssl_wildcard_crt }};
+    ssl_certificate_key       {{ ssl_wildcard__key }};
     include h5bp/directive-only/ssl.conf;
 
     location = /favicon.ico { log_not_found off; access_log off; }
