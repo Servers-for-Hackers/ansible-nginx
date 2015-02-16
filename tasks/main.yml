@@ -26,6 +26,8 @@
 - name: Enable SFH Site Config
   when: sfhconfig|success
   file: src=/etc/nginx/sites-available/{{ domain }}.conf dest=/etc/nginx/sites-enabled/{{ domain }}.conf state=link
+  notify:
+    - Reload Nginx
 
 - name: Create Web root
   when: nginxinstalled|success
