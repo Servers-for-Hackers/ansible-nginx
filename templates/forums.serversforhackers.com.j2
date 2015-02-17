@@ -1,20 +1,20 @@
 server {
     # Enforce the use of HTTPS
     listen 80 default_server;
-    server_name {{ forums_domain }};
-    return 301 https://{{ forums_domain }}$request_uri;
+    server_name {{ domain }};
+    return 301 https://{{ domain }}$request_uri;
 }
 
 server {
     listen 443 default_server ssl;
 
-    root /var/www/{{ forums_domain }}/public;
+    root /var/www/{{ domain }}/public;
     index index.html index.htm;
 
-    access_log /var/log/nginx/{{ forums_domain }}.log;
-    error_log  /var/log/nginx/{{ forums_domain }}-error.log error;
+    access_log /var/log/nginx/{{ domain }}.log;
+    error_log  /var/log/nginx/{{ domain }}-error.log error;
 
-    server_name {{ forums_domain }};
+    server_name {{ domain }};
 
     charset utf-8;
 
