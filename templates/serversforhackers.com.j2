@@ -9,7 +9,7 @@ server {
     listen 443 default_server ssl;
 
     root /var/www/{{ domain }}/public;
-    index index.html index.htm;
+    index index.html index.htm index.php;
 
     access_log /var/log/nginx/{{ domain }}.log;
     error_log  /var/log/nginx/{{ domain }}-error.log error;
