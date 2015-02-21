@@ -22,6 +22,8 @@
   when: nginxinstalled|success
   register: sfhconfig
   template: src={{ domain }}.j2 dest=/etc/nginx/sites-available/{{ domain }}.conf owner=root group=root
+  notify:
+    - Reload Nginx
 
 - name: Enable SFH Site Config
   when: sfhconfig|success
