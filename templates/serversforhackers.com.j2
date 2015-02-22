@@ -48,6 +48,14 @@ server {
         return 301 $scheme://$host/firewall-auto-updating/;
     }
 
+    location /battling-selinux {
+        return 301 $scheme://$host/video/battling-selinux-cast;
+    }
+
+    location /deploy-envoy {
+        return 301 $scheme://$host/video/deploying-with-envoy-cast;
+    }
+
     # Editions and Articles get combined
     location ~ "^/(editions|articles)/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/?$" {
         return 301 $scheme://$host/$mdfile;
@@ -57,6 +65,7 @@ server {
     location ~ "^/emails/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/?$" {
         return 301 $scheme://$host/emails/$mdfile;
     }
+
 
     location / {
         try_files $uri $uri/ /index.php$is_args$args;
@@ -92,6 +101,6 @@ server {
         allow 127.0.0.1;
         deny all;
         include fastcgi.conf;
-        fastcgi_pass unix:/var/run/php5-fpm.sock;
+        fastcgi_pass 127.0.0.1:9000;
     }
 }
