@@ -56,6 +56,10 @@ server {
         return 301 $scheme://$host/video/deploying-with-envoy-cast;
     }
 
+    location /deploying-with-envoy {
+        return 301 $scheme://$host/video/deploying-with-envoy-cast;
+    }
+
     # Editions and Articles get combined
     location ~ "^/(editions|articles)/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/?$" {
         return 301 $scheme://$host/$mdfile;
