@@ -60,6 +60,90 @@ server {
         return 301 $scheme://$host/video/deploying-with-envoy-cast;
     }
 
+    location /web-apps {
+        return 301 $scheme://$host/hosting-web-applications;
+    }
+
+    location /apache-proxy-fcgi {
+        return 301 $scheme://$host/proxying-to-fastcgi-in-ubuntuapache-24;
+    }
+
+    location /linux-acl {
+        return 301 $scheme://$host/beyond-permissions-linux-acls;
+    }
+
+    location /nginx-from-src {
+        return 301 $scheme://$host/compiling-third-party-modules-into-nginx;
+    }
+
+    location /pgsql {
+        return 301 $scheme://$host/using-postgresql;
+    }
+
+    location /pm2 {
+        return 301 $scheme://$host/node-process-management-with-pm2;
+    }
+
+    location /mailcatcher {
+        return 301 $scheme://$host/setting-up-mailcatcher;
+    }
+
+    location /getting-started-with-ansible {
+        return 301 $scheme://$host/an-ansible-tutorial;
+    }
+
+    location /process-monitoring {
+        return 301 $scheme://$host/monitoring-processes-with-supervisord;
+    }
+
+    location /haproxy-ssl-termation-pass-through {
+        return 301 $scheme://$host/using-ssl-certificates-with-haproxy;
+    }
+
+    location /haproxy {
+        return 301 $scheme://$host/load-balancing-with-haproxy;
+    }
+
+    location /initial-security {
+        return 301 $scheme://$host/initial-security-setup;
+    }
+
+    location /firewall-auto-updating {
+        return 301 $scheme://$host/firewalls-and-auto-updating;
+    }
+
+    location /permissions-users {
+        return 301 $scheme://$host/permissions-and-user-management;
+    }
+
+    location /server-for-multi-tenancy {
+        return 301 $scheme://$host/server-setup-for-multi-tenancy-applications;
+    }
+
+    location /hosts-file-dns {
+        return 301 $scheme://$host/hosts-file-and-dns;
+    }
+
+    location /ssl-certs {
+        return 301 $scheme://$host/self-signed-ssl-certificates;
+    }
+
+    location /nginx-start {
+        return 301 $scheme://$host/getting-started-with-nginx;
+    }
+
+    location /nginx-loadbalancer {
+        return 301 $scheme://$host/using-nginx-as-a-load-balancer;
+    }
+
+    location /log-rotate {
+        return 301 $scheme://$host/managing-logs-with-logrotate;
+    }
+
+    location /apache-vhost {
+        return 301 $scheme://$host/configuring-apache-virtual-hosts;
+    }
+
     # Editions and Articles get combined
     location ~ "^/(editions|articles)/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/?$" {
         return 301 $scheme://$host/$mdfile;

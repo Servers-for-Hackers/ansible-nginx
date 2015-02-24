@@ -31,14 +31,16 @@
   notify:
     - Reload Nginx
 
-- name: Create Web root
-  when: nginxinstalled|success
-  file: dest=/var/www/{{ domain }}/public mode=775 state=directory owner=www-data group=www-data
-  notify:
-    - Reload Nginx
+#- name: Create Web root
+#  when: nginxinstalled|success
+#  file: dest=/var/www/{{ domain }}/public mode=775 state=directory owner=www-data group=www-data
+#  ignore_errors: yes
+#  notify:
+#    - Reload Nginx
 
-- name: Web Root Permissions
-  when: nginxinstalled|success
-  file: dest=/var/www/{{ domain }} mode=775 state=directory owner=www-data group=www-data recurse=yes
-  notify:
-    - Reload Nginx
+#- name: Web Root Permissions
+#  when: nginxinstalled|success
+#  file: dest=/var/www/{{ domain }} mode=775 state=directory owner=www-data group=www-data recurse=yes
+#  ignore_errors: yes
+#  notify:
+#    - Reload Nginx

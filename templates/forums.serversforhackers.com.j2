@@ -22,8 +22,6 @@ server {
 
     charset utf-8;
 
-    include h5bp/basic.conf;
-
     ssl_certificate           {{ ssl_wildcard_crt }};
     ssl_certificate_key       {{ ssl_key }};
     include h5bp/directive-only/ssl.conf;
