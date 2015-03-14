@@ -24,6 +24,8 @@ server {
     ssl_certificate_key       {{ ssl_key }};
     include h5bp/directive-only/ssl.conf;
 
+    rewrite ^(.+)/+$ $1 permanent;
+
     location /book {
         return 301 http://book.serversforhackers.com;
     }
@@ -104,7 +106,11 @@ server {
         return 301 $scheme://$host/load-balancing-with-haproxy;
     }
 
-    location /initial-security {
+    location = /initial-security {
+        return 301 $scheme://$host/initial-security-setup;
+    }
+
+    location = /initial-security/ {
         return 301 $scheme://$host/initial-security-setup;
     }
 
