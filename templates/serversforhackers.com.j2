@@ -24,8 +24,6 @@ server {
     ssl_certificate_key       {{ ssl_key }};
     include h5bp/directive-only/ssl.conf;
 
-    rewrite ^(.+)/+$ $1 permanent;
-
     location /book {
         return 301 http://book.serversforhackers.com;
     }
@@ -170,6 +168,9 @@ server {
     location = /robots.txt  { log_not_found off; access_log off; }
 
     location ~ ^/index\.php(/|$) {
+
+        rewrite ^(.+)/+$ $1 permanent;
+
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
         fastcgi_pass 127.0.0.1:9000;
         fastcgi_index index.php;
