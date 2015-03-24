@@ -12,6 +12,16 @@
   tags:
     - vhost
 
+- name: Add Nginx Config
+  copy: src=nginx.conf dest=/etc/nginx/nginx.conf owner=root group=root
+  tags:
+    - vhost
+
+- name: Add Nginx Mime Types
+  copy: src=mime.types dest=/etc/nginx/mime.types owner=root group=root
+  tags:
+    - vhost
+
 - name: Disable Default Site
   file: dest=/etc/nginx/sites-enabled/default state=absent
   tags:
