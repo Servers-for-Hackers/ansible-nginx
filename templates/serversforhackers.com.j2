@@ -28,6 +28,10 @@ server {
         return 301 http://book.serversforhackers.com;
     }
 
+    location = /feed.xml {
+        return 301 $scheme://$host/feed;
+    }
+
     location = /editions/2014/02/25/vagrant-apache/ {
         return 301 $scheme://$host/getting-off-of-mamp/;
     }
